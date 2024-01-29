@@ -22,7 +22,6 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(nullable=False)
     username: Mapped[str] = mapped_column(nullable=False)
-    password: Mapped[str] = mapped_column(nullable=False)
     registered_at: Mapped[datetime] = mapped_column(TIMESTAMP, default=datetime.utcnow)
     role_id: Mapped[int] = mapped_column(ForeignKey(Role.id), nullable=True)
     hashed_password: Mapped[str] = mapped_column(

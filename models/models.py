@@ -14,7 +14,7 @@ class Role(Base):
     __tablename__ = 'role'
 
     name: Mapped[str] = mapped_column(nullable=False)
-    permissions: Mapped[str] = mapped_column(JSON)
+    permissions: Mapped[str] = mapped_column(JSON, nullable=True)
 
 
 class User(Base):
