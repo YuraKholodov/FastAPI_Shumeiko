@@ -1,22 +1,17 @@
 import uvicorn
-from datetime import datetime
-from enum import Enum
-from typing import List, Optional, Union
 
-from fastapi_users import fastapi_users, FastAPIUsers
-from pydantic import BaseModel, Field
 
-from fastapi import FastAPI, Request, status, Depends
-from fastapi.encoders import jsonable_encoder
-# from fastapi.exceptions import ValidationError
-from fastapi.responses import JSONResponse
+from fastapi_users import FastAPIUsers
+
+
+from fastapi import FastAPI, Depends
 
 from auth.auth import auth_backend
 from auth.database import User
 from auth.manager import get_user_manager
 from auth.schemas import UserRead, UserCreate
 
-app = FastAPI(title='Trading app')
+app = FastAPI(title="Trading app")
 
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
@@ -33,6 +28,19 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
+
+current_user = fastapi_users.current_user()
+
+
+@app.get("/protected-route")
+def protected_route(user: User = Depends(current_user)):
+    return f"Hello, {user.username}"
+
+
+@app.get("/unprotected-route")
+def unprotected_route():
+    return f"Hello, anonym"
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
