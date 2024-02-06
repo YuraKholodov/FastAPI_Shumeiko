@@ -10,11 +10,12 @@ from sqlalchemy import String, Boolean, TIMESTAMP, ForeignKey
 
 from pathlib import Path
 
+from config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT
 from models.models import Role
 
 BASE_DIR = Path(__file__).parent.parent
 
-DATABASE_URL = f"sqlite+aiosqlite:///{BASE_DIR}/db.sqlite3"
+DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 Base: DeclarativeMeta = declarative_base()
 
 

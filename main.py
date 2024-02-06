@@ -1,8 +1,6 @@
 import uvicorn
 
-
 from fastapi_users import FastAPIUsers
-
 
 from fastapi import FastAPI, Depends
 
