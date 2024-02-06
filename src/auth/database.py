@@ -10,8 +10,8 @@ from sqlalchemy import String, Boolean, TIMESTAMP, ForeignKey
 
 from pathlib import Path
 
-from config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT
-from models.models import Role
+from src.config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT
+from src.auth.models import Role
 
 BASE_DIR = Path(__file__).parent.parent
 
