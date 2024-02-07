@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class OperationCreate(BaseModel):
-    id: int
+    # id: int
     quantity: str
     figi: str
     instrument_type: str
